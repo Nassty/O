@@ -44,7 +44,7 @@ you already know the function you will call and the parameters, so it's simpler 
 the function there.
 
 O.args(args, [begin, [end]])
---------------------------
+----------------------------
 
 *O.args* returns a slice of the arguments object passed in *args*
 sliced starting from *begin* until the *end*. Both *being* and *end* are optional.
