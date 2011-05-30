@@ -47,13 +47,40 @@ O.args(args, [begin, [end]])
 ----------------------------
 
 *O.args* returns a slice of the arguments object passed in *args*
-sliced starting from *begin* until the *end*. Both *being* and *end* are optional.
+sliced starting from *begin* until the *end*. Both *being* and *end* are optional::
+
+        >>> fun = function () { console.log("first", arguments[0], "rest", O.args(arguments, 1)); }
+        function()
+        >>> fun(1,2,3,4,5);
+        first 1 rest [2, 3, 4, 5]
+
+why is it useful?
+.................
+
+useful for building tools like *O.js* ;)
+
 
 O.partial(fun, arg1, [arg2, ..., argN])
 ---------------------------------------
 
 *O.partial* returns a function that when called will call *fun* passing the rest of the arguments
-passed to *O.partial* plus the arguments passed to the function.
+passed to *O.partial* plus the arguments passed to the function::
+
+        >>> multiply = function (a, b) { return a * b; };
+        function()
+        >>> multiplyBy2 = O.partial(multiply, 2);
+        function()
+        >>> multiply(2, 5);
+        10
+        >>> multiplyBy2(5);
+        10
+
+why is it useful?
+.................
+
+useful when you see yourself using the same function with some fixed parameters
+all over the place.
+
 
 O.bind(fun, [thisArg])
 ----------------------
@@ -61,7 +88,18 @@ O.bind(fun, [thisArg])
 *O.bind* returns a function that when called will call *fun* passing the parameters passed to
 the function with *this* bound to *thisArg*.
 
-If this is not passed then *this* will be *null*.
+If this is not passed then *this* will be *null*::
+
+        >>> addThis = O.bind(function (num) { return this + num; }, 5);
+        function()
+        >>> addThis(2);
+        7
+
+why is it useful?
+.................
+
+useful for things like event handlers.
+
 
 FAQ
 ---
@@ -74,7 +112,7 @@ looking for short names $ and _ where already taken so I looked for a nice upper
 Why not F if it's about functions?
 ..................................
 
-O is simetric and nice ;)
+O is simmetryc and nice ;)
 
 Is that the zero number or the O letter?
 ........................................
