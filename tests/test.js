@@ -35,16 +35,16 @@
     });
 
     test("args", function () {
-        function check(args, from, expected) {
-            var argret = function (from) {
+        function check(args, begin, end) {
+            var argret = function (begin, end) {
                 return function () {
-                    return O.args(arguments, from);
+                    return O.args(arguments, begin, end);
                 };
-            }, fun, returned;
+            }, fun, returned, expected;
 
-            fun = argret(from);
+            fun = argret(begin, end);
             returned = fun.apply(null, args);
-            expected = args.slice(from);
+            expected = args.slice(begin, end);
 
             deepEqual(returned, expected);
         }
@@ -58,6 +58,7 @@
         check([{}], 0);
         check([{a: 1}], 0);
 
+        check([1, 2, 3, 4], 1, 3);
     });
 
     test("partial", function () {
@@ -72,7 +73,6 @@
             returned = curried.apply(null, args2);
             expected = args1.concat(args2);
 
-            console.log(returned, expected);
             deepEqual(returned, expected);
         }
 

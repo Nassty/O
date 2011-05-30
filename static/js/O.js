@@ -22,10 +22,10 @@
         };
     };
 
-    /* returns the arguments in *args* starting from *from* */
-    O.args = function (args, from) {
-        from = from || 0;
-        return Array.prototype.slice.apply(args, [from]);
+    /* returns the arguments in *args* starting from *begin* until *end* */
+    O.args = function (args, begin, end) {
+        begin = begin || 0;
+        return Array.prototype.slice.apply(args, [begin, end]);
     };
 
     /* return a function that when called will pass the original
