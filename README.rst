@@ -102,7 +102,7 @@ useful for things like event handlers.
 
 
 O.compose(inner, outer, [unpack=false])
-.......................................
+--------------------------------------
 
 *O.compose* returns a function wrapping inner and outer. The returned value of inner is 
 passed as outer as an argument. If the flag unpack is true and the inner function returns several
@@ -122,7 +122,7 @@ With this function is trivial to implement several functions in a single call, I
 
 
 O.flip(fun)
-..........
+-----------
 
 *O.flip* wraps a function to receive the arguments in reverse order::
 
