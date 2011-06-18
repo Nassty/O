@@ -54,5 +54,36 @@
         };
     };
 
+    // composes a new function by returning the output of inner
+    // to outer as the first parameter.
+    //
+    // eg: 
+    // var add = function(a, b) { return a + b }
+    // var double = function(a) { return 2 * a }
+    // O.compose(add, double)(1, 2) == double(add(1,2))
+    //
+    // by passing the unpack flag, the outer function will receive
+    // several arguments if the inner function returns an array
+    O.compose = function(inner, outer, unpack) {
+        unpack = unpack || false;
+        return function () {
+            var inner_result = inner.apply(this, arguments),
+                args = [];
+            if(unpack) { // TODO: is this an array? well, it should be 
+                args = inner_result; 
+            } else {
+                args = [inner_result];
+            }
+            return outer.apply(this, args);
+        };
+    };
+
+    // wraps a function to receive the arguments flipped 
+    O.flip = function(fun) {
+        return function() {
+            return fun.apply(this, Array.prototype.reverse.call(arguments));
+        };
+    };
+
     window.O = O;
 }());

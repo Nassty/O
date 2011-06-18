@@ -101,6 +101,42 @@ why is it useful?
 useful for things like event handlers.
 
 
+O.compose(inner, outer, [unpack=false])
+.......................................
+
+*O.compose* returns a function wrapping inner and outer. The returned value of inner is 
+passed as outer as an argument. If the flag unpack is true and the inner function returns several
+values as an array, the outer function will receive those arguments as parameters::
+
+        >>> var add = function (a, b) { return a + b };
+        function()
+        >>> var double = function (a) { a * 2 };
+        function()
+        >>> O.compose(add, double) (1, 2);
+        6
+
+why is it useful?
+.................
+
+With this function is trivial to implement several functions in a single call, IE: using map.
+
+
+O.flip(fun)
+..........
+
+*O.flip* wraps a function to receive the arguments in reverse order::
+
+        >>> var divide = function (a, b) { return a / b};
+        function()
+        >>> O.flip(divide) (1, 2)
+        2
+
+why is it useful?
+................
+
+Allows to manipulate the arguments without changing the function's signature.
+
+
 FAQ
 ---
 

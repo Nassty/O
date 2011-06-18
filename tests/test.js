@@ -106,4 +106,43 @@
         }, 3)(42, 1), 46);
     });
 
+
+    test("compose no_unpack", function () {
+
+        var add = function (a, b) {
+            return a + b;
+        };
+        
+        var plus_two = function (a) {
+            return a + 2;
+        };
+
+        var result = O.compose(add, plus_two) (1, 2);
+        equal(result, 5);
+    });
+    
+    test("compose unpack", function () {
+
+        var add_and_pack = function (a, b, c) {
+            return [a + b, c];
+        };
+
+        var divide = function (a, b) {
+            return a / b;
+        };
+
+        var result = O.compose(add_and_pack, divide, true) (1, 2, 3);
+        equal(result, 1);
+    });
+
+    test("flip", function () {
+
+        var divide = function(a, b) {
+            return a / b;
+        };
+        
+        var result = O.flip(divide) (1, 2);
+        equal(result, 2);
+    });
+
 }());
